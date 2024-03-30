@@ -13,7 +13,7 @@ const SignupSchema = Yup.object().shape({
     .required('Обязательное поле'),
 });
 
-export const LoginPage = () => (
+const LoginPage = () => (
   <div>
     <h1>Signup</h1>
     <Formik
@@ -42,3 +42,5 @@ export const LoginPage = () => (
     </Formik>
   </div>
 );
+
+export default LoginPage;
