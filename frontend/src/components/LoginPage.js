@@ -22,20 +22,33 @@ const LoginPage = () => (
         password: '',
       }}
       validationSchema={SignupSchema}
-      onSubmit={ (values) => {
-        console.log(values);
+      onSubmit={({ setSubmitting }) => {
+        console.log("Form is validated! Submitting the form...");
+        setSubmitting(false);
       }}
     >
       {({ errors, touched }) => (
         <Form>
-          <Field name="login" />
-          {errors.login && touched.login ? (
-            <div>{errors.login}</div>
-          ) : null}
-          <Field name="password" />
-          {errors.password && touched.password ? (
-            <div>{errors.password}</div>
-          ) : null}
+          <div className="form-group">
+            <Field 
+              type="login"
+              name="login"
+              className="form-control" 
+            />
+            {errors.login && touched.login ? (
+              <div>{errors.login}</div>
+            ) : null}
+          </div>
+          <div className="form-group"> 
+            <Field
+              type="password"
+              name="password"
+              className="form-control"
+            />
+            {errors.password && touched.password ? (
+              <div>{errors.password}</div>
+            ) : null}
+          </div>
           <button type="submit">Submit</button>
         </Form>
       )}
