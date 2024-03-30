@@ -13,7 +13,7 @@ const SignupSchema = Yup.object().shape({
     .required('Обязательное поле'),
 });
 
-export const ValidationSchema = () => (
+export const LoginPage = () => (
   <div>
     <h1>Signup</h1>
     <Formik
