@@ -83,15 +83,13 @@ const SocketProvider = ({ socket, children }) => {
 };
 
 const init = (socket) => {
-  const vdom = (
+  return (
     <StoreProvider store={store}>
       <SocketProvider socket={socket}>
         <App />
       </SocketProvider>
     </StoreProvider>
   );
-
-  return vdom;
 };
 
 export default init;
