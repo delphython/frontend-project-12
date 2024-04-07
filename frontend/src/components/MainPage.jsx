@@ -38,7 +38,7 @@ const MainPage = () => {
       dispatch(messagesActions.addMessages(messages));
     };
     fetchData();
-  }, []);
+  }, [auth, dispatch]);
 
   const renderModal = (type, hide, id) => {
     if (!type) {
