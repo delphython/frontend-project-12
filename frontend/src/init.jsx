@@ -8,7 +8,7 @@ import store from './slices/index.js';
 import App from './components/App.jsx';
 import { SocketContext } from './contexts/index.js';
 import { actions as messagesActions } from './slices/messagesSlice.js';
-import { actions as channelsActions } from './slices/channelsSlice';
+import { actions as channelsActions } from './slices/channelsSlice.js';
 
 const SocketProvider = ({ socket, children }) => {
   const dispatch = useDispatch();
