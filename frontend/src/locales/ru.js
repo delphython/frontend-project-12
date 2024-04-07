@@ -1,5 +1,3 @@
-// eslint-disable-next-line import/no-anonymous-default-export
-
 const ru = {
   translation: {
     loading: 'Загрузка...',
@@ -51,6 +49,7 @@ const ru = {
       name: 'Имя канала',
       cancel: 'Отменить',
       send: 'Отправить',
+      success: 'Канал создан',
     },
     modalRename: {
       channelConstraints: 'От 3 до 20 символов',
@@ -62,12 +61,14 @@ const ru = {
       name: 'Имя канала',
       cancel: 'Отменить',
       send: 'Отправить',
+      success: 'Канал переименован',
     },
     modalRemove: {
       removeChannel: 'Удалить канал',
       confirm: 'Уверены?',
       cancel: 'Отменить',
       remove: 'Удалить',
+      success: 'Канал удалён',
     },
     notFound: {
       header: 'Страница не найдена',

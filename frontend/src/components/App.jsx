@@ -5,6 +5,7 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import { ToastContainer } from 'react-toastify';
 import Header from './Header.jsx';
 import LoginPage from './LoginPage.jsx';
 import RegistrationPage from './RegistrationPage.jsx';
@@ -74,6 +75,7 @@ const App = () => (
           <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
+      <ToastContainer />
     </BrowserRouter>
   </AuthProvider>
 );
