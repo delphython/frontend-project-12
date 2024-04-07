@@ -12,7 +12,7 @@ import { actions as messagesActions } from '../slices/messagesSlice.js';
 const MainPage = () => {
     const auth = useAuth();
     const dispatch = useDispatch();
-    
+  
     useEffect(() => {
       const fetchData = async () => {
         const response = await axios.get(routes.dataPath(), { headers: auth.getAuthHeader() });

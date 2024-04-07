@@ -11,32 +11,29 @@ const Messages = () => {
 
   useEffect(() => {
     inputRef.current.focus();
-  }, []);
+  });
 
   const handleSubmit = (e) => {
     e.preventDefault();
     console.log(message);
     setMessage('');
   };
-  
+
   const handleChange = (e) => {
     setMessage(e.target.value);
   };
 
-  const channels = useSelector(channelsSelectors.selectAll);
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
-  const currentChannel = channels.find((channel) => channel.id === currentChannelId);
-  console.log(currentChannel);
+  const currentChannel = useSelector((state) => channelsSelectors.selectById(state, currentChannelId));
 
   const messages = useSelector(messagesSelectors.selectAll);
-  console.log(messages);
 
   return (
     <div className="col p-0 h-100">
       <div className="d-flex flex-column h-100">
         <div className="bg-light mb-4 p-3 shadow-sm small">
-          <p className="m-0"><b># {currentChannel.name}</b></p>
-          <span className="text-muted">{messages.length} сообщения</span>
+          <p className="m-0"><b># {currentChannel?.name}</b></p>
+          <span className="text-muted">{messages.length} сообщений</span>
         </div>
         <div id="messages-box" className="chat-messages overflow-auto px-5 ">
           <div className="text-break mb-2">
