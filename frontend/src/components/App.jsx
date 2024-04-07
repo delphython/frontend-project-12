@@ -7,7 +7,7 @@ import {
 
 import LoginPage from './LoginPage.jsx';
 import MainPage from './MainPage.jsx';
-import NotFoundPage from './NotFoundPage.jsx';
+import NotFoundPage from './PageNotFound.jsx';
 
 const App = () => {
   const hasToken = () => {
