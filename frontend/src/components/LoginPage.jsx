@@ -6,7 +6,8 @@ import { Button, Form } from 'react-bootstrap';
 import * as yup from 'yup';
 import { useAuth } from '../hooks/index.js';
 import routes from '../routes.js';
-import avatar from '../assets/avatar.jpg';
+
+import image from '../assets/avatar.jpg';
 
 const LoginPage = () => {
   const [authFailed, setAuthFailed] = useState(false);
@@ -57,7 +58,7 @@ const LoginPage = () => {
             <div className="card-body row p-5">
               <div className="col-12 col-md-6 d-flex align-items-center justify-content-center">
                 <img
-                  src={avatar}
+                  src={image}
                   className="rounded-circle"
                   alt="Войти"
                 />
@@ -97,6 +98,13 @@ const LoginPage = () => {
                 </Form.Group>
                 <Button type="submit" variant="outline-primary" className="w-100 mb-3">Войти</Button>
               </Form>
+            </div>
+            <div className="card-footer p-4">
+              <div className="text-center">
+                <span>Нет аккаунта?</span>
+                {' '}
+                <a href="/signup">Регистрация</a>
+              </div>
             </div>
           </div>
         </div>
