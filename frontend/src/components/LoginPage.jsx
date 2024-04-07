@@ -4,6 +4,7 @@ import { useNavigate } from 'react-router-dom'
 import { useFormik } from 'formik';
 import { Button, Form } from 'react-bootstrap';
 import * as Yup from 'yup';
+import useAuth from '../hooks/index.js';
 import routes from '../routes.js';
 
 const validationSchema = Yup.object().shape({
@@ -19,6 +20,7 @@ const validationSchema = Yup.object().shape({
 
 const LoginPage = () => {
   const [authFailed, setAuthFailed] = useState(false);
+  const auth = useAuth();
   const inputRef = useRef();
   const navigate = useNavigate();
 
@@ -33,9 +35,10 @@ const LoginPage = () => {
     },
     validationSchema,
     onSubmit: async (values) => {
+      setAuthFailed(false);
       try {
-        setAuthFailed(false);
         const response = await axios.post(routes.loginPath(), values);
+        auth.logIn(response.data);
         localStorage.setItem('user', JSON.stringify(response.data));
         console.log(response.data);
         navigate('/');
@@ -62,7 +65,7 @@ const LoginPage = () => {
           ref={inputRef}
           placeholder="username"
         />
-        <Form.Label htmlFor="username">Логин</Form.Label>
+        <Form.Label htmlFor="username">Ваш ник</Form.Label>
       </Form.Group>
       <Form.Group>
         <Form.Control
