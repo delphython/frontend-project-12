@@ -4,7 +4,7 @@ import { useDispatch } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
-import useAuth from '../hooks/index.js';
+import { useAuth } from '../hooks/index.js';
 import routes from '../routes.js';
 import getModal from './modals/index.js';
 import { actions as channelsActions } from '../slices/channelsSlice.js';

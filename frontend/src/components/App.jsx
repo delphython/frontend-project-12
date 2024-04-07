@@ -1,18 +1,15 @@
-import React from 'react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 import {
   BrowserRouter,
   Routes,
   Route,
   Navigate,
 } from 'react-router-dom';
-import { Provider as StoreProvider } from 'react-redux';
 import LoginPage from './LoginPage.jsx';
 import MainPage from './MainPage.jsx';
 import NotFoundPage from './PageNotFound.jsx';
-import AuthContext from '../contexts/index.js';
-import useAuth from '../hooks/index.js';
-import store from '../slices/index.js';
+import { AuthContext } from '../contexts/index.js';
+import { useAuth } from '../hooks/index.js';
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
