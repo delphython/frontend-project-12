@@ -56,23 +56,21 @@ const MainPageRoute = ({ children }) => {
 };
 
 const App = () => (
-  <StoreProvider store={store}>
-    <AuthProvider>
-      <div className="d-flex flex-column h-100">
-        <BrowserRouter>
-          <Routes>
-            <Route path="/" element={(
-              <MainPageRoute>
-                <MainPage />
-              </MainPageRoute>
-            )} />
-            <Route path="/login" element={<LoginPage />} />
-            <Route path="*" element={<NotFoundPage />} />
-          </Routes>
-        </BrowserRouter>
-      </div>
-    </AuthProvider>
-  </StoreProvider>
+  <AuthProvider>
+    <div className="d-flex flex-column h-100">
+      <BrowserRouter>
+        <Routes>
+          <Route path="/" element={(
+            <MainPageRoute>
+              <MainPage />
+            </MainPageRoute>
+          )} />
+          <Route path="/login" element={<LoginPage />} />
+          <Route path="*" element={<NotFoundPage />} />
+        </Routes>
+      </BrowserRouter>
+    </div>
+  </AuthProvider>
 );
 
 export default App;
