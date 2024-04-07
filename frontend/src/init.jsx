@@ -4,6 +4,7 @@ import store from './slices/index.js';
 import App from './components/App.jsx';
 import { SocketContext } from './contexts/index.js';
 import { actions as messagesActions } from './slices/messagesSlice.js';
+import { actions as channelsActions } from './slices/channelsSlice';
 
 const SocketProvider = ({ socket, children }) => {
   const dispatch = useDispatch();
@@ -18,9 +19,23 @@ const SocketProvider = ({ socket, children }) => {
     dispatch(messagesActions.addMessage(payload));
   });
 
+  const addNewChannel = (channel) => socket.emit('newChannel', channel, (response) => {
+    if (response.status === 'ok') {
+      const { id } = response.data;
+      dispatch(channelsActions.setCurrentChannelId(id));
+    } else {
+      console.log(response.status);
+    }
+  });
+
+  socket.on('newChannel', (payload) => {
+    dispatch(channelsActions.addChannel(payload));
+  });
+
   return (
     <SocketContext.Provider value={{
       addNewMessage,
+      addNewChannel,
     }}>
       {children}
     </SocketContext.Provider>

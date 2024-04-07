@@ -3,11 +3,13 @@ import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import { useSocket } from '../../hooks/index.js';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
 
 const Add = (props) => {
   const { onHide } = props;
   const inputEl = useRef();
+  const chat = useSocket();
 
   useEffect(() => {
     inputEl.current.focus();
@@ -31,7 +33,7 @@ const Add = (props) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      console.log(values);
+      chat.addNewChannel(values);
       onHide();
     },
   });
