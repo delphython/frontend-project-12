@@ -2,7 +2,6 @@ import React, { useEffect, useRef } from 'react';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { Modal, Form, Button } from 'react-bootstrap';
-
 import { useSelector } from 'react-redux';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
 
@@ -15,7 +14,7 @@ const Add = (props) => {
   }, []);
 
   const channels = useSelector(channelsSelectors.selectAll);
-  
+
   const validationSchema = yup.object().shape({
     name: yup
       .string()
