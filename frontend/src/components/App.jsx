@@ -58,8 +58,8 @@ const MainPageRoute = ({ children }) => {
 const App = () => (
   <StoreProvider store={store}>
     <AuthProvider>
-      <BrowserRouter>
-        <div className="d-flex flex-column h-100">
+      <div className="d-flex flex-column h-100">
+        <BrowserRouter>
           <Routes>
             <Route path="/" element={(
               <MainPageRoute>
@@ -69,8 +69,8 @@ const App = () => (
             <Route path="/login" element={<LoginPage />} />
             <Route path="*" element={<NotFoundPage />} />
           </Routes>
-        </div>
-      </BrowserRouter>
+        </BrowserRouter>
+      </div>
     </AuthProvider>
   </StoreProvider>
 );
