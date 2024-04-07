@@ -1,3 +1,5 @@
+// eslint-disable-next-line no-dupe-keys
+
 const ru = {
   translation: {
     loading: 'Загрузка...',
