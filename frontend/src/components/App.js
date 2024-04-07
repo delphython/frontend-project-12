@@ -3,9 +3,9 @@ import {
   Routes,
   Route,
 } from 'react-router-dom';
-import LoginPage from './components/LoginPage';
-import MainPage from './components/MainPage';
-import PageNotFound from './components/PageNotFound';
+import LoginPage from './LoginPage';
+import MainPage from './MainPage';
+import PageNotFound from './PageNotFound';
 
 function App() {
   return (
