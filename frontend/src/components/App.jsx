@@ -6,11 +6,13 @@ import {
   Route,
   Navigate,
 } from 'react-router-dom';
+import { Provider as StoreProvider } from 'react-redux';
 import LoginPage from './LoginPage.jsx';
 import MainPage from './MainPage.jsx';
 import NotFoundPage from './PageNotFound.jsx';
 import AuthContext from '../contexts/index.js';
 import useAuth from '../hooks/index.js';
+import store from '../slices/index.js';
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -34,7 +36,12 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value ={{ user, logIn, logOut, getAuthHeader }}>
+    <AuthContext.Provider value ={{
+      user,
+      logIn,
+      logOut,
+      getAuthHeader,
+    }}>
       {children}
     </AuthContext.Provider>
   );
@@ -48,8 +55,8 @@ const MainPageRoute = ({ children }) => {
   );
 };
 
-const App = () => {
-  return (
+const App = () => (
+  <StoreProvider store={store}>
     <AuthProvider>
       <BrowserRouter>
         <div className="d-flex flex-column h-100">
@@ -65,7 +72,7 @@ const App = () => {
         </div>
       </BrowserRouter>
     </AuthProvider>
-  );
-};
+  </StoreProvider>
+);
 
 export default App;
