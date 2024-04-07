@@ -1,5 +1,9 @@
 import React from 'react';
-import { Provider as StoreProvider, useDispatch } from 'react-redux';
+import {
+  Provider as StoreProvider,
+  useDispatch,
+  useSelector,
+} from 'react-redux';
 import store from './slices/index.js';
 import App from './components/App.jsx';
 import { SocketContext } from './contexts/index.js';
@@ -8,6 +12,8 @@ import { actions as channelsActions } from './slices/channelsSlice';
 
 const SocketProvider = ({ socket, children }) => {
   const dispatch = useDispatch();
+
+  const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
   const addNewMessage = (message) => socket.emit('newMessage', message, (response) => {
     if (response.status !== 'ok') {
@@ -32,11 +38,28 @@ const SocketProvider = ({ socket, children }) => {
     dispatch(channelsActions.addChannel(payload));
   });
 
+  const removeChannel = (id) => socket.emit('removeChannel', { id }, (response) => {
+    if (response.status !== 'ok') {
+      console.log(response.status);
+    }
+  });
+
+  socket.on('removeChannel', (payload) => {
+    dispatch(channelsActions.removeChannel(payload));
+    if (payload.id === currentChannelId) {
+      dispatch(channelsActions.setCurrentChannelId(1));
+    } else {
+      dispatch(channelsActions.setCurrentChannelId(currentChannelId));
+    }
+  });
+
   return (
     <SocketContext.Provider value={{
       addNewMessage,
       addNewChannel,
-    }}>
+      removeChannel,
+    }}
+    >
       {children}
     </SocketContext.Provider>
   );
