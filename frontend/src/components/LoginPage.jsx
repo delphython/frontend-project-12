@@ -9,14 +9,12 @@ import routes from '../routes.js';
 import avatar from '../assets/avatar.jpg';
 
 const validationSchema = Yup.object().shape({
-  username: Yup.string()
-    .min(2, 'Минимум 2 буквы')
-    .max(50, 'Максимум 50 букв')
-    .required('Обязательное поле'),
-  password: Yup.string()
-    .min(5, 'Минимум 5 букв')
-    .max(50, 'Максимум 50 букв')
-    .required('Обязательное поле'),
+  username: Yup
+    .string()
+    .required('Required'),
+  password: Yup
+    .string()
+    .required('Required'),
 });
 
 const LoginPage = () => {
