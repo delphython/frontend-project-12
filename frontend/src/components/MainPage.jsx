@@ -1,12 +1,26 @@
-import React from "react";
- 
+import axios from 'axios';
+import React, { useEffect } from 'react';
+
+import useAuth from '../hooks/index.js';
+import routes from '../routes.js';
+
 const MainPage = () => {
-    return (
-        <div>
-            <h1>Main Page</h1>
-            <h1>Page Found</h1>
-        </div>
-    );
+
+  const { getAuthHeader } = useAuth();
+  
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await axios.get(routes.dataPath(), { headers: getAuthHeader() });
+      console.log(response.data);
+    };
+    fetchData();
+  }, [getAuthHeader]);
+
+  return (
+    <div>
+        Page Found
+    </div>
+  );
 };
- 
+
 export default MainPage;

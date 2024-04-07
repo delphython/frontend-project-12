@@ -38,8 +38,6 @@ const LoginPage = () => {
       try {
         const response = await axios.post(routes.loginPath(), values);
         auth.logIn(response.data);
-        localStorage.setItem('user', JSON.stringify(response.data));
-        console.log(response.data);
         navigate('/');
       } catch (err) {
         setAuthFailed(true);
@@ -76,7 +74,7 @@ const LoginPage = () => {
                     ref={inputRef}
                     placeholder="username"
                   />
-                  <Form.Label htmlFor="username">Логин</Form.Label>
+                  <Form.Label htmlFor="username">Ваш ник</Form.Label>
                 </Form.Group>
                 <Form.Group className="form-floating mb-4">
                   <Form.Control
