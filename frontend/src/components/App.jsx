@@ -7,7 +7,7 @@ import {
 } from 'react-router-dom';
 import LoginPage from './LoginPage.jsx';
 import MainPage from './MainPage.jsx';
-import NotFoundPage from './PageNotFound.jsx';
+import PageNotFound from './PageNotFound.jsx';
 import { AuthContext } from '../contexts/index.js';
 import { useAuth } from '../hooks/index.js';
 
@@ -63,7 +63,7 @@ const App = () => (
             </MainPageRoute>
           )} />
           <Route path="/login" element={<LoginPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </BrowserRouter>
     </div>
