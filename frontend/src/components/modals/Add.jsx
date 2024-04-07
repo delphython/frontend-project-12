@@ -63,7 +63,6 @@ const Add = (props) => {
             <Button className="me-2" variant="secondary" onClick={onHide}>Отменить</Button>
             <Button type="submit" variant="primary">Отправить</Button>
           </div>
-
         </Form>
       </Modal.Body>
     </Modal>
