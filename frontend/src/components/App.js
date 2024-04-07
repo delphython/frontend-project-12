@@ -1,3 +1,4 @@
+import React, { useState, useEffect } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -7,11 +8,20 @@ import LoginPage from './LoginPage';
 import MainPage from './MainPage';
 import PageNotFound from './PageNotFound';
 
-function App() {
+const App = () => {
+  const [token, setToken] = useState('');
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem('user'));
+    if (user && user.token) {
+      setToken(user.token);
+    }
+  });
+
   return (
     <BrowserRouter>
       <Routes>
-        <Route path="/" element={<MainPage/> } />
+        <Route path="/" element={token ? <MainPage /> : <LoginPage />} />
         <Route path="login" element={<LoginPage />} />
         <Route path="*" element={<PageNotFound />} />
       </Routes>
