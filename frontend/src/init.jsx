@@ -4,13 +4,18 @@ import {
   useDispatch,
   useSelector,
 } from 'react-redux';
+import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
+
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
+
 import store from './slices/index.js';
 import App from './components/App.jsx';
 import { SocketContext } from './contexts/index.js';
+
 import { actions as messagesActions } from './slices/messagesSlice.js';
 import { actions as channelsActions } from './slices/channelsSlice';
+
 import resources from './locales/index.js';
 
 const SocketProvider = ({ socket, children }) => {
@@ -85,6 +90,13 @@ const SocketProvider = ({ socket, children }) => {
   );
 };
 
+const rollbarConfig = {
+  accessToken: 'a5a76fb6005a44ec8b8828b69177f231',
+  environment: 'production',
+  captureUncaught: true,
+  captureUnhandledRejections: true,
+};
+
 const init = async (socket) => {
   const i18n = i18next.createInstance();
 
@@ -96,13 +108,17 @@ const init = async (socket) => {
     });
 
   return (
-    <StoreProvider store={store}>
-      <SocketProvider socket={socket}>
-        <I18nextProvider i18n={i18n}>
-          <App />
-        </I18nextProvider>
-      </SocketProvider>
-    </StoreProvider>
+    <RollbarProvider config={rollbarConfig}>
+      <ErrorBoundary>
+        <StoreProvider store={store}>
+          <SocketProvider socket={socket}>
+            <I18nextProvider i18n={i18n}>
+              <App />
+            </I18nextProvider>
+          </SocketProvider>
+        </StoreProvider>
+      </ErrorBoundary>
+    </RollbarProvider>
   );
 };
 
