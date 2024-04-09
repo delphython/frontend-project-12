@@ -10,7 +10,7 @@ import store from './slices/index.js';
 import App from './components/App.jsx';
 import { SocketContext } from './contexts/index.js';
 import { actions as messagesActions } from './slices/messagesSlice.js';
-import { actions as channelsActions } from './slices/channelsSlice.js';
+import { actions as channelsActions } from './slices/channelsSlice';
 import resources from './locales/index.js';
 
 const SocketProvider = ({ socket, children }) => {
@@ -56,7 +56,7 @@ const SocketProvider = ({ socket, children }) => {
     }
   });
 
-  const renameChannel = (id, name) => socket.emit('renameChannel', { id, name }, (response) => {
+  const renameChannel = (renamedChannel) => socket.emit('renameChannel', renamedChannel, (response) => {
     if (response.status !== 'ok') {
       console.log(response.status);
     }
