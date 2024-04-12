@@ -74,17 +74,12 @@ const SocketProvider = ({ socket, children }) => {
   });
 
   return (
-    <SocketContext.Provider value={useMemo(() => ({ 
-      addNewMessage,
-      addNewChannel,
-      removeChannel,
-      renameChannel, 
-    }), [
+    <SocketContext.Provider value={{
       addNewMessage,
       addNewChannel,
       removeChannel,
       renameChannel,
-    ])}
+    }}
     >
       {children}
     </SocketContext.Provider>
