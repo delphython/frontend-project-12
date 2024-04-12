@@ -1,3 +1,6 @@
+install:
+  npm install
+
 start-frontend:
 	make -C frontend start
 
