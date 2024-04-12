@@ -20,26 +20,27 @@ const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
   const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
 
-  const logIn = (userData) => {
-    localStorage.setItem('user', JSON.stringify(userData));
-    setUser({ username: userData.username });
-  };
 
-  const logOut = () => {
-    localStorage.removeItem('user');
-    setUser(null);
-  };
+  const obj = useMemo(() => {
+    const logIn = (userData) => {
+      localStorage.setItem('user', JSON.stringify(userData));
+      setUser({ username: userData.username });
+    };
+  
+    const logOut = () => {
+      localStorage.removeItem('user');
+      setUser(null);
+    };
+  
+    const getAuthHeader = () => {
+      if (currentUser && currentUser.token) {
+        return { Authorization: `Bearer ${currentUser.token}` };
+      }
+      return {};
+    };
 
-  const getAuthHeader = () => {
-    if (currentUser && currentUser.token) {
-      return { Authorization: `Bearer ${currentUser.token}` };
-    }
-    return {};
-  };
-
-  const obj = useMemo(() => ({
-    user, logIn, logOut, getAuthHeader
-  }),[user, logIn, logOut, getAuthHeader]);
+    return{ user, logIn, logOut, getAuthHeader }
+  },[user]);
 
   return (
     <AuthContext.Provider 
