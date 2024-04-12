@@ -21,8 +21,6 @@ const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(currentUser ? { username: currentUser.username } : null);
 
   const obj = useMemo(() => {
-    const currentUser = JSON.parse(localStorage.getItem('user'));
-
     const logIn = (userData) => {
       localStorage.setItem('user', JSON.stringify(userData));
       setUser({ username: userData.username });
@@ -40,13 +38,13 @@ const AuthProvider = ({ children }) => {
       return {};
     };
 
-    return { 
+    return {
       user,
-      logIn, 
-      logOut, 
-      getAuthHeader, 
-    }
-  }, [user]);
+      logIn,
+      logOut,
+      getAuthHeader,
+    };
+  }, [user, currentUser]);
 
   return (
     <AuthContext.Provider 
