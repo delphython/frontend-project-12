@@ -1,21 +1,17 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import {
   Provider as StoreProvider,
   useDispatch,
   useSelector,
 } from 'react-redux';
 import { Provider as RollbarProvider, ErrorBoundary } from '@rollbar/react';
-
 import i18next from 'i18next';
 import { I18nextProvider, initReactI18next } from 'react-i18next';
-
 import store from './slices/index.js';
 import App from './components/App.jsx';
 import { SocketContext } from './contexts/index.js';
-
 import { actions as messagesActions } from './slices/messagesSlice.js';
 import { actions as channelsActions } from './slices/channelsSlice';
-
 import resources from './locales/index.js';
 
 const SocketProvider = ({ socket, children }) => {
@@ -78,12 +74,17 @@ const SocketProvider = ({ socket, children }) => {
   });
 
   return (
-    <SocketContext.Provider value={{
+    <SocketContext.Provider value={useMemo(() => ({ 
+      addNewMessage,
+      addNewChannel,
+      removeChannel,
+      renameChannel, 
+    }), [
       addNewMessage,
       addNewChannel,
       removeChannel,
       renameChannel,
-    }}
+    ])}
     >
       {children}
     </SocketContext.Provider>

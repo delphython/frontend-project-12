@@ -1,5 +1,3 @@
-// eslint-disable-next-line no-dupe-keys
-
 const ru = {
   translation: {
     loading: 'Загрузка...',
@@ -55,8 +53,6 @@ const ru = {
     },
     modalRename: {
       channelConstraints: 'От 3 до 20 символов',
-      unique: 'Должно быть уникальным',
-      required: 'Обязательное поле',
       unique: 'Должно быть уникальным',
       required: 'Обязательное поле',
       renameChannel: 'Переименовать канал',

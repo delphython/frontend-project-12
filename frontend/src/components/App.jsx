@@ -1,4 +1,6 @@
-import React, { useState } from 'react';
+// eslint-disable-next-line react/jsx-no-constructed-context-values
+
+import React, { useState, useMemo } from 'react';
 import {
   BrowserRouter,
   Routes,
@@ -36,12 +38,17 @@ const AuthProvider = ({ children }) => {
   };
 
   return (
-    <AuthContext.Provider value={{
+    <AuthContext.Provider value={useMemo(() => ({ 
+      user,
+      logIn,
+      logOut,
+      getAuthHeader, 
+    }), [
       user,
       logIn,
       logOut,
       getAuthHeader,
-    }}
+    ])}
     >
       {children}
     </AuthContext.Provider>
