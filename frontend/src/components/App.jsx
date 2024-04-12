@@ -37,13 +37,13 @@ const AuthProvider = ({ children }) => {
     return {};
   };
 
+  const obj = useMemo(() => ({
+    user, logIn, logOut, getAuthHeader
+  }),[user, logIn, logOut, getAuthHeader]);
+
   return (
-    <AuthContext.Provider value={{
-      user,
-      logIn,
-      logOut,
-      getAuthHeader,
-    }}
+    <AuthContext.Provider 
+      value={obj}
     >
       {children}
     </AuthContext.Provider>
