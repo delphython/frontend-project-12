@@ -47,6 +47,6 @@
     ]
   },
   "devDependencies": {
-    "eslint-plugin-functional": "^6.4.0"
+    "eslint-plugin-functional": "^4.2.1"
   }
 }
