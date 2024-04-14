@@ -47,7 +47,7 @@ const AuthProvider = ({ children }) => {
   }, [user, currentUser]);
 
   return (
-    <AuthContext.Provider 
+    <AuthContext.Provider
       value={obj}
     >
       {children}
