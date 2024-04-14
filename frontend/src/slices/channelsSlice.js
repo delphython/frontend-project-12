@@ -1,4 +1,4 @@
-// eslint-disable-line no-param-reassign
+/* eslint-disable no-param-reassign */
 
 import { createSlice, createEntityAdapter } from '@reduxjs/toolkit';
 
