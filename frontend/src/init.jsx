@@ -80,10 +80,10 @@ const SocketProvider = ({ socket, children }) => {
       removeChannel,
       renameChannel,
     };
-  }, []);
+  }, [dispatch, socket]);
 
   return (
-    <SocketContext.Provider 
+    <SocketContext.Provider
       value={obj}
     >
       {children}
