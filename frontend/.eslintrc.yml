@@ -3,7 +3,6 @@ env:
   es2021: true
 
 extends:
-  - airbnb
   - plugin:react/recommended
   - plugin:functional/recommended
   - plugin:react-hooks/recommended
@@ -34,4 +33,3 @@ rules:
   react/function-component-definition: [2, { "namedComponents": "arrow-function" }]
   testing-library/no-debug: 0
   react/jsx-filename-extension: [1, { "extensions": [".js", ".jsx"] }]
-  
