@@ -1,4 +1,6 @@
-import React, { useMemo } from 'react';
+/* eslint-disable react/jsx-no-constructed-context-values */
+
+import React from 'react';
 import {
   Provider as StoreProvider,
   useDispatch,
@@ -19,12 +21,33 @@ const SocketProvider = ({ socket, children }) => {
 
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
 
+  const addNewMessage = (message) => socket.emit('newMessage', message, (response) => {
+    if (response.status !== 'ok') {
+      console.log(response.status);
+    }
+  });
+
   socket.on('newMessage', (payload) => {
     dispatch(messagesActions.addMessage(payload));
   });
 
+  const addNewChannel = (channel) => socket.emit('newChannel', channel, (response) => {
+    if (response.status === 'ok') {
+      const { id } = response.data;
+      dispatch(channelsActions.setCurrentChannelId(id));
+    } else {
+      console.log(response.status);
+    }
+  });
+
   socket.on('newChannel', (payload) => {
     dispatch(channelsActions.addChannel(payload));
+  });
+
+  const removeChannel = (id) => socket.emit('removeChannel', { id }, (response) => {
+    if (response.status !== 'ok') {
+      console.log(response.status);
+    }
   });
 
   socket.on('removeChannel', (payload) => {
@@ -33,6 +56,12 @@ const SocketProvider = ({ socket, children }) => {
       dispatch(channelsActions.setCurrentChannelId(1));
     } else {
       dispatch(channelsActions.setCurrentChannelId(currentChannelId));
+    }
+  });
+
+  const renameChannel = (renamedChannel) => socket.emit('renameChannel', renamedChannel, (response) => {
+    if (response.status !== 'ok') {
+      console.log(response.status);
     }
   });
 
@@ -46,45 +75,13 @@ const SocketProvider = ({ socket, children }) => {
     }));
   });
 
-  const obj = useMemo(() => {
-    const addNewMessage = (message) => socket.emit('newMessage', message, (response) => {
-      if (response.status !== 'ok') {
-        console.log(response.status);
-      }
-    });
-
-    const addNewChannel = (channel) => socket.emit('newChannel', channel, (response) => {
-      if (response.status === 'ok') {
-        const { id } = response.data;
-        dispatch(channelsActions.setCurrentChannelId(id));
-      } else {
-        console.log(response.status);
-      }
-    });
-
-    const removeChannel = (id) => socket.emit('removeChannel', { id }, (response) => {
-      if (response.status !== 'ok') {
-        console.log(response.status);
-      }
-    });
-
-    const renameChannel = (renamedChannel) => socket.emit('renameChannel', renamedChannel, (response) => {
-      if (response.status !== 'ok') {
-        console.log(response.status);
-      }
-    });
-
-    return {
+  return (
+    <SocketContext.Provider value={{
       addNewMessage,
       addNewChannel,
       removeChannel,
       renameChannel,
-    };
-  }, [dispatch, socket]);
-
-  return (
-    <SocketContext.Provider
-      value={obj}
+    }}
     >
       {children}
     </SocketContext.Provider>
@@ -92,7 +89,7 @@ const SocketProvider = ({ socket, children }) => {
 };
 
 const rollbarConfig = {
-  accessToken: process.env.REACT_APP_ROLLBAR_TOKEN,
+  accessToken: '9eedeb0568154ea086db04e66f8d26e3',
   environment: 'production',
   captureUncaught: true,
   captureUnhandledRejections: true,
