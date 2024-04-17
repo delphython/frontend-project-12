@@ -1,5 +1,6 @@
 ### Hexlet tests and linter status:
 [![Actions Status](https://github.com/delphython/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/delphython/frontend-project-12/actions)
+[![Maintainability](https://api.codeclimate.com/v1/badges/cd559f511ca4a069d4b1/maintainability)](https://codeclimate.com/github/delphython/frontend-project-12/maintainability)
 
 ## Hexlet Chat
 It is a slack-like chat where you can:
