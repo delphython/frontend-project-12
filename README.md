@@ -2,12 +2,11 @@
 [![Actions Status](https://github.com/delphython/frontend-project-12/actions/workflows/hexlet-check.yml/badge.svg)](https://github.com/delphython/frontend-project-12/actions)
 
 ## Hexlet Chat
-This is my final project on the frontend learning course.
 It is a slack-like chat where you can:
-- Message
+- Send messages to channels
 - Add, rename or remove channels
 
-Hexlet Chat has full support of Login system, which means that you can register new users and log into them.
+Hexlet Chat has full support for register new users and log in.
 
 ### Install locally
 ```
