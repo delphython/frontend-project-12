@@ -31,7 +31,7 @@ const MainPage = () => {
     const fetchData = async () => {
       const response = await axios.get(
         apiRoutes.dataPath(),
-        { headers: { Authorization: `Bearer ${auth.getToken()}` } }
+        { headers: { Authorization: `Bearer ${auth.getToken()}` } },
       );
 
       const { channels, currentChannelId, messages } = response.data;

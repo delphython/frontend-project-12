@@ -34,6 +34,8 @@ const AuthProvider = ({ children }) => {
   const getToken = () => {
     if (currentUser && currentUser.token) {
       return currentUser.token;
+    } else {
+      return {};
     }
   };
 
