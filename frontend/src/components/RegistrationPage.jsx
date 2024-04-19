@@ -7,7 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useAuth } from '../hooks/index.js';
-import routes from '../routes.js';
+import { apiRoutes } from '../routes.js';
 import image from '../assets/avatar_1.jpg';
 
 const RegistrationPage = () => {
@@ -49,7 +49,7 @@ const RegistrationPage = () => {
       setRegistrationFailed(false);
       try {
         const response = await axios.post(
-          routes.signupPath(),
+          apiRoutes.signupPath(),
           { username: values.username, password: values.password },
         );
         auth.logIn(response.data);

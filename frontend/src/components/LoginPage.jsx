@@ -7,7 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useAuth } from '../hooks/index.js';
-import routes from '../routes.js';
+import { apiRoutes } from '../routes.js';
 import image from '../assets/avatar.jpg';
 
 const LoginPage = () => {
@@ -41,7 +41,7 @@ const LoginPage = () => {
     onSubmit: async (values) => {
       setAuthFailed(false);
       try {
-        const response = await axios.post(routes.loginPath(), values);
+        const response = await axios.post(apiRoutes.loginPath(), values);
         auth.logIn(response.data);
         navigate('/');
       } catch (err) {

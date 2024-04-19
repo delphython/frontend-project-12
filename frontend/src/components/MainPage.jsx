@@ -5,7 +5,7 @@ import { Container, Row } from 'react-bootstrap';
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
 import { useAuth } from '../hooks/index.js';
-import routes from '../routes.js';
+import { apiRoutes } from '../routes.js';
 import getModal from './modals/index.js';
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import { actions as messagesActions } from '../slices/messagesSlice.js';
@@ -29,7 +29,10 @@ const MainPage = () => {
 
   useEffect(() => {
     const fetchData = async () => {
-      const response = await axios.get(routes.dataPath(), { headers: auth.getAuthHeader() });
+      const response = await axios.get(
+        apiRoutes.dataPath(),
+        { headers: { Authorization: `Bearer ${auth.getToken()}` } }
+      );
 
       const { channels, currentChannelId, messages } = response.data;
 

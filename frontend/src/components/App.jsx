@@ -12,9 +12,10 @@ import Header from './Header.jsx';
 import LoginPage from './LoginPage.jsx';
 import RegistrationPage from './RegistrationPage.jsx';
 import MainPage from './MainPage.jsx';
-import NotFoundPage from './NotFoundPage.jsx';
+import PageNotFound from './PageNotFound.jsx';
 import { AuthContext } from '../contexts/index.js';
 import { useAuth } from '../hooks/index.js';
+import { routes } from '../routes.js';
 
 const AuthProvider = ({ children }) => {
   const currentUser = JSON.parse(localStorage.getItem('user'));
@@ -30,11 +31,10 @@ const AuthProvider = ({ children }) => {
     setUser(null);
   };
 
-  const getAuthHeader = () => {
+  const getToken = () => {
     if (currentUser && currentUser.token) {
-      return { Authorization: `Bearer ${currentUser.token}` };
+      return currentUser.token;
     }
-    return {};
   };
 
   return (
@@ -42,7 +42,7 @@ const AuthProvider = ({ children }) => {
       user,
       logIn,
       logOut,
-      getAuthHeader,
+      getToken,
     }}
     >
       {children}
@@ -54,7 +54,7 @@ const MainPageRoute = ({ children }) => {
   const auth = useAuth();
 
   return (
-    auth.user ? children : <Navigate to="/login" />
+    auth.user ? children : <Navigate to={routes.loginPath()} />
   );
 };
 
@@ -65,16 +65,16 @@ const App = () => (
         <Header />
         <Routes>
           <Route
-            path="/"
+            path={routes.rootPath()}
             element={(
               <MainPageRoute>
                 <MainPage />
               </MainPageRoute>
           )}
           />
-          <Route path="/login" element={<LoginPage />} />
-          <Route path="/signup" element={<RegistrationPage />} />
-          <Route path="*" element={<NotFoundPage />} />
+          <Route path={routes.loginPath()} element={<LoginPage />} />
+          <Route path={routes.signupPath()} element={<RegistrationPage />} />
+          <Route path="*" element={<PageNotFound />} />
         </Routes>
       </div>
       <ToastContainer />
