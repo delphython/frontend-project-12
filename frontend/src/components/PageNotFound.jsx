@@ -12,7 +12,7 @@ const PageNotFound = () => {
       <p className="text-muted">
         {t('notFound.message')}
         {' '}
-        <a href="/">{t('notFound.linkText')}</a>
+        <a href={routes.rootPath()}>{t('notFound.linkText')}</a>
       </p>
     </div>
   );

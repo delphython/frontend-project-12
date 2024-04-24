@@ -7,7 +7,7 @@ import { Button, Form } from 'react-bootstrap';
 import * as yup from 'yup';
 import { toast } from 'react-toastify';
 import { useAuth } from '../hooks/index.js';
-import { apiRoutes } from '../routes.js';
+import { apiRoutes, routes } from '../routes.js';
 import image from '../assets/avatar.jpg';
 
 const LoginPage = () => {
@@ -43,7 +43,7 @@ const LoginPage = () => {
       try {
         const response = await axios.post(apiRoutes.loginPath(), values);
         auth.logIn(response.data);
-        navigate('/');
+        navigate(routes.rootPath());
       } catch (err) {
         console.log(err);
         if (err.isAxiosError) {
@@ -114,7 +114,7 @@ const LoginPage = () => {
               <div className="text-center">
                 <span>{t('login.newToChat')}</span>
                 {' '}
-                <a href="/signup">{t('login.signup')}</a>
+                <a href={routes.signupPath()}>{t('login.signup')}</a>
               </div>
             </div>
           </div>
