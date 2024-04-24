@@ -89,7 +89,7 @@ const SocketProvider = ({ socket, children }) => {
 };
 
 const rollbarConfig = {
-  accessToken: '9eedeb0568154ea086db04e66f8d26e3',
+  accessToken: process.env.REACT_APP_ROLLBAR_TOKEN,
   environment: 'production',
   captureUncaught: true,
   captureUnhandledRejections: true,
