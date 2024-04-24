@@ -7,14 +7,12 @@ import { toast } from 'react-toastify';
 import { useSelector } from 'react-redux';
 import { useSocket } from '../../hooks/index.js';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
-import { ProfanityContext } from '../contexts/index.js';
 
 const Add = (props) => {
   const { onHide } = props;
   const inputEl = useRef();
   const chat = useSocket();
   const { t } = useTranslation();
-  const profanity = useContext(ProfanityContext);
 
   useEffect(() => {
     inputEl.current.focus();
