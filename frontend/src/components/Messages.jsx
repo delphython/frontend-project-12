@@ -1,6 +1,5 @@
-import React, { useRef, useEffect } from 'react';
+import React, { useRef, useEffect, useContext } from 'react';
 import * as yup from 'yup';
-import leoProfanity from 'leo-profanity';
 import { useFormik } from 'formik';
 import { useSelector } from 'react-redux';
 import { useTranslation } from 'react-i18next';
@@ -9,6 +8,7 @@ import { ArrowRightSquare } from 'react-bootstrap-icons';
 import { useAuth, useSocket } from '../hooks/index.js';
 import { selectors as channelsSelectors } from '../slices/channelsSlice.js';
 import { selectors as messagesSelectors } from '../slices/messagesSlice.js';
+import { ProfanityContext } from '../contexts/index.js';
 
 const Messages = () => {
   const inputRef = useRef();
@@ -16,10 +16,7 @@ const Messages = () => {
   const auth = useAuth();
   const chat = useSocket();
   const { t } = useTranslation();
-
-  leoProfanity.clearList();
-  leoProfanity.add(leoProfanity.getDictionary('en'));
-  leoProfanity.add(leoProfanity.getDictionary('ru'));
+  const profanity = useContext(ProfanityContext);
 
   const currentChannelId = useSelector((state) => state.channels.currentChannelId);
   const currentChannel = useSelector((state) => channelsSelectors
@@ -52,7 +49,7 @@ const Messages = () => {
     validationSchema,
     onSubmit: (values) => {
       const { body } = values;
-      const cleanedMessage = leoProfanity.clean(body);
+      const cleanedMessage = profanity.clean(body);
       const channelId = currentChannelId;
       const { username } = auth.user;
       const data = {

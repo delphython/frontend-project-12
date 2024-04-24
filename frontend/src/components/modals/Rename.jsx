@@ -1,5 +1,4 @@
 import React, { useEffect, useRef } from 'react';
-import leoProfanity from 'leo-profanity';
 import * as yup from 'yup';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
@@ -8,12 +7,14 @@ import { Modal, Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
 import { useSocket } from '../../hooks/index.js';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
+import { ProfanityContext } from '../contexts/index.js';
 
 const Rename = (props) => {
   const { onHide, id } = props;
   const inputEl = useRef();
   const chat = useSocket();
   const { t } = useTranslation();
+  const profanity = useContext(ProfanityContext);
 
   const channels = useSelector(channelsSelectors.selectAll);
   const currentChannel = channels.find((channel) => channel.id === id);
@@ -34,7 +35,7 @@ const Rename = (props) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      const cleanedName = leoProfanity.clean(values.name);
+      const cleanedName = profanity.clean(values.name);
       chat.renameChannel({ id, name: cleanedName });
       toast.success(t('modalRename.success'));
       onHide();
