@@ -1,15 +1,19 @@
 import React, { useEffect, useRef } from 'react';
 import * as yup from 'yup';
+import leoProfanity from 'leo-profanity';
 import { useFormik } from 'formik';
 import { useTranslation } from 'react-i18next';
 import { Modal, Form, Button } from 'react-bootstrap';
 import { toast } from 'react-toastify';
-import { useSelector } from 'react-redux';
+
+import { useSelector, useDispatch } from 'react-redux';
+
 import { useSocket } from '../../hooks/index.js';
 import { selectors as channelsSelectors } from '../../slices/channelsSlice.js';
+import { actions as modalsActions } from '../../slices/modalsSlice.js';
 
-const Add = (props) => {
-  const { onHide } = props;
+const Add = () => {
+  const dispatch = useDispatch();
   const inputEl = useRef();
   const chat = useSocket();
   const { t } = useTranslation();
@@ -36,16 +40,16 @@ const Add = (props) => {
     },
     validationSchema,
     onSubmit: (values) => {
-      const cleanedName = profanity.clean(values.name);
+      const cleanedName = leoProfanity.clean(values.name);
       chat.addNewChannel({ name: cleanedName });
       toast.success(t('modalAdd.success'));
-      onHide();
+      dispatch(modalsActions.hideModal());
     },
   });
 
   return (
     <Modal show centered>
-      <Modal.Header closeButton onHide={onHide}>
+      <Modal.Header closeButton onHide={() => dispatch(modalsActions.hideModal())}>
         <Modal.Title>{t('modalAdd.addChannel')}</Modal.Title>
       </Modal.Header>
 
@@ -65,7 +69,13 @@ const Add = (props) => {
             {formik.errors.name}
           </Form.Control.Feedback>
           <div className="d-flex justify-content-end">
-            <Button className="me-2" variant="secondary" onClick={onHide}>{t('modalAdd.cancel')}</Button>
+            <Button
+              className="me-2"
+              variant="secondary"
+              onClick={() => dispatch(modalsActions.hideModal())}
+            >
+              {t('modalAdd.cancel')}
+            </Button>
             <Button type="submit" variant="primary">{t('modalAdd.send')}</Button>
           </div>
         </Form>
