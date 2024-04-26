@@ -2,15 +2,11 @@ import axios from 'axios';
 import React, { useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Container, Row } from 'react-bootstrap';
-import { useTranslation } from 'react-i18next';
-
 import Channels from './Channels.jsx';
 import Messages from './Messages.jsx';
-
 import { useAuth } from '../hooks/index.js';
 import { apiRoutes } from '../routes.js';
 import getModal from './modals/index.js';
-
 import { actions as channelsActions } from '../slices/channelsSlice.js';
 import { actions as messagesActions } from '../slices/messagesSlice.js';
 
